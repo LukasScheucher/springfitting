@@ -1,0 +1,17 @@
+DIR='/scratch/scheucher/workspace/baci_springfitting/transfer/material_damping'
+PRE='/scratch/scheucher/workspace/baci_springfitting_release/pre_exodus'
+MAIN='/scratch/scheucher/workspace/baci_springfitting_release/baci-release'
+POST='/scratch/scheucher/workspace/baci_springfitting_release/post_processor'
+
+rm $DIR/out/*
+rm $DIR/ens/*
+rm $DIR/dat/*
+
+
+
+$PRE --exo=$DIR/plate.exo --bc=damping.bc --head=$DIR/damping.head --dat=$DIR/dat/damping.dat
+
+mpirun -np 3 $MAIN $DIR/dat/damping.dat $DIR/out/damping
+
+$POST --filter=ensight --file=$DIR/out/damping --output=$DIR/ens/damping --stress=cxyz_ndxyz
+

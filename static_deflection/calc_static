@@ -1,0 +1,13 @@
+DIR='/scratch/scheucher/workspace/baci_springfitting/transfer/static_deflection'
+PRE='/scratch/scheucher/workspace/baci_springfitting_release/pre_exodus'
+MAIN='/scratch/scheucher/workspace/baci_springfitting_release/baci-release'
+POST='/scratch/scheucher/workspace/baci_springfitting_release/post_processor'
+
+rm $DIR/out/s*
+rm $DIR/ens/s*
+rm $DIR/dat/s*
+
+$PRE --exo=$DIR/plate.exo --bc=$DIR/static.bc --head=$DIR/static.head --dat=$DIR/dat/static.dat
+$MAIN $DIR/dat/static.dat $DIR/out/static
+$POST --filter=ensight --file=$DIR/out/static --output=$DIR/ens/static --stress=cxyz_ndxyz
+

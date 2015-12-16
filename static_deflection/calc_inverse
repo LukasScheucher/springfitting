@@ -1,0 +1,17 @@
+DIR='/scratch/scheucher/workspace/baci_springfitting/transfer/static_deflection'
+PRE='/scratch/scheucher/workspace/baci_springfitting_release/pre_exodus'
+MAIN='/scratch/scheucher/workspace/baci_springfitting_release/baci-release'
+POST='/scratch/scheucher/workspace/baci_springfitting_release/post_processor'
+
+rm /$DIR/out/i*
+rm /$DIR/ens/i*
+rm /$DIR/dat/i*
+
+
+$PRE --exo=$DIR/plate.exo --bc=$DIR/inverse_static.bc --head=$DIR/inverse_static.head --dat=$DIR/dat/inverse_static.dat
+
+echo $MAIN $DIR/dat/inverse_static.dat $DIR/out/inverse_static
+
+mpirun -np 3 $MAIN -ngroup=3 -nptype=copyDatFile $DIR/dat/inverse_static.dat $DIR/out/inverse_static
+
+$POST --filter=ensight --file=$DIR/out/inverse_static --output=$DIR/ens/inverse_static --stress=cxyz_ndxyz

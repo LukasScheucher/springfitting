@@ -1,0 +1,122 @@
+# build the experiment D6 -> just flat plate, no frame
+# flat plate with 300 mm length of coupling to fluid and 15 mm at both ends
+# for clamping (->total length 330 mm)
+# using Cubit13.2 with 64bit machine
+reset
+
+$ defines------------------
+$ coordinate system is located at x=0.015m, y=0.0m, z=0.0m
+$# {panel_x=0.330}    $ streamwise direction in [m], coupling length is only 0.3m
+$#{coupling_length_x=0.3}  $ in [m]
+$# {panel_y=0.0015}   $ "coupling direction" in [m]
+$# {panel_z=0.06}   $ spanwise direction in [m]
+
+$ here are for example [cm] chosen as unit
+$# {panel_x=33}    $ streamwise direction
+$# {coupling_length_x=30}
+$# {panel_y=0.147}   $ "coupling direction"
+$# {panel_z=0.30}   $ spanwise direction
+$# {coupling_delta_y=0.0001041}
+
+$ final case with coupling surf of plate located at x0=0.22m and x1=0.52m, y=0.0m, z0=-0.015m, z1=+0.015m
+# {panel_x=33}    $ streamwise direction [cm]
+# {coupling_length_x=30}
+# {panel_y=0.147}   $ "coupling direction"
+# {panel_z=0.30}   $ spanwise direction
+# {coupling_delta_y=0.0001}
+# {delta=0.001}
+# {xoffset=22}  $ coordinate system of coupled system is 22 cm in front of coupling surf
+
+# {numele_x=100}
+# {numele_y=2}
+# {numele_z=1}
+# {biasFactor_coupling=1.0}
+#
+$$ define toleranze for node selection
+# {Tol=0.00001}
+
+$ defines------------------
+
+# create plate
+create brick x {panel_x} y {panel_y} z {panel_z+2*delta}
+volume 1 move x {xoffset+coupling_length_x/2} y {-panel_y/2-coupling_delta_y}
+
+# cut volume in order to get coupling and clamping regions
+webcut volume 1  with plane xplane offset {xoffset+0} imprint merge
+webcut volume 1  with plane xplane offset {xoffset+coupling_length_x} imprint merge
+webcut volume all  with plane yplane offset {-panel_y/2-coupling_delta_y} imprint merge
+
+
+##PLATE
+# length of plate x (coupling region}
+curve 43 interval {numele_x}
+# length of plate x (clamping region}
+curve 26 35 interval {numele_x/20}
+
+# length of plate y 
+curve 74 66 73 68 59 51 60 49   interval {numele_y/2}
+
+# length of plate z
+curve 12 30 16 11 63 9 47 10 32 14 interval {numele_z}
+
+# mesh plate
+mesh volume all
+
+
+
+# build block plate with or without calmping blocks
+$block 1 volume all
+block 1 volume 3 6
+block 1 name 'panel'
+
+block 2 volume 1 2 4 5
+block 2 name 'clamping_blocks'
+
+group "couplingsurf" add node with y_coord >= {-Tol-coupling_delta_y}
+nodeset 1 group couplingsurf
+nodeset 1 name 'coupling_surf'
+
+#only support middle lines which connect panel and clamping blocks
+nodeset 2 curve 45 61 
+nodeset 2 name 'clamping lines'
+
+#only support middle lines which connect panel and clamping blocks
+nodeset 3 vertex 33 34 25 26
+nodeset 3 name 'clamping points'
+
+nodeset 4 surface 23 
+nodeset 4 name 'bottom_surf_pinf'
+
+group "symmsurface" add node with z_coord <= {-panel_z / 2.0 + Tol}
+group "symmsurface" add node with z_coord >= {+panel_z / 2.0 - Tol}
+nodeset 5 group symmsurface
+nodeset 5 name "symmsurface"
+
+# when clamping panel at the end of the clamping blocks
+nodeset 7 surface 28 36 38 46
+nodeset 7 name 'clamping_blocks_right_left'
+
+#nodes of clamping blocks
+nodeset 10 volume 1 2 4 5 
+nodeset 10 name "clamping_blocks_nodes"
+
+
+## write output
+$export mesh "/home/hammerl/simulations/TFSI_FlatPlate_AuslegungD6/bc_spring_fitting/jou_exo_bc_head_dat/FlatPlate_cm_100x2x1_rot_clamping_blocks.exo" dimension 3 overwrite
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

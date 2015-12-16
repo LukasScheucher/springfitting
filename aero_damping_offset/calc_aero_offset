@@ -1,0 +1,40 @@
+DIR='/scratch/scheucher/workspace/baci_springfitting/transfer/aero_damping_offset'
+PRE='/scratch/scheucher/workspace/baci_springfitting_release/pre_exodus'
+MAIN='/scratch/scheucher/workspace/baci_springfitting_release/baci-release'
+POST='/scratch/scheucher/workspace/baci_springfitting_release/post_processor'
+
+rm $DIR/out/o*
+rm $DIR/ens/o*
+rm $DIR/dat/o*
+
+
+$PRE --exo=$DIR/plate.exo --bc=$DIR/offset_aerospring_1p7.bc --head=$DIR/offset_aerospring.head --dat=$DIR/dat/offset_aerospring_1p7.dat
+
+mpirun -np 3 $MAIN $DIR/dat/offset_aerospring_1p7.dat $DIR/out/offset_aerospring_1p7
+
+$POST --filter=ensight --file=$DIR/out/offset_aerospring_1p7 --output=$DIR/ens/offset_aerospring_1p7 --stress=cxyz_ndxyz
+
+
+
+$PRE --exo=$DIR/plate.exo --bc=$DIR/offset_aerospring_2p9.bc --head=$DIR/offset_aerospring.head --dat=$DIR/dat/offset_aerospring_2p9.dat
+
+mpirun -np 3 $MAIN $DIR/dat/offset_aerospring_2p9.dat $DIR/out/offset_aerospring_2p9
+
+$POST --filter=ensight --file=$DIR/out/offset_aerospring_2p9 --output=$DIR/ens/offset_aerospring_2p9 --stress=cxyz_ndxyz
+
+
+
+$PRE --exo=$DIR/plate.exo --bc=$DIR/offset_aerospring_4p0.bc --head=$DIR/offset_aerospring.head --dat=$DIR/dat/offset_aerospring_4p0.dat
+
+mpirun -np 3 $MAIN $DIR/dat/offset_aerospring_4p0.dat $DIR/out/offset_aerospring_4p0
+
+$POST --filter=ensight --file=$DIR/out/offset_aerospring_4p0 --output=$DIR/ens/offset_aerospring_4p0  --stress=cxyz_ndxyz
+
+
+
+$PRE --exo=$DIR/plate.exo --bc=$DIR/offset_aerospring_5p3.bc --head=$DIR/offset_aerospring.head --dat=$DIR/dat/offset_aerospring_5p3.dat
+
+mpirun -np 3 $MAIN $DIR/dat/offset_aerospring_5p3.dat $DIR/out/offset_aerospring_5p3
+
+$POST --filter=ensight --file=$DIR/out/offset_aerospring_5p3 --output=$DIR/ens/offset_aerospring_5p3 --stress=cxyz_ndxyz
+

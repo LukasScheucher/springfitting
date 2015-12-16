@@ -1,0 +1,37 @@
+ ____  _____    _    ____  __  __ _____ 
+|  _ \| ____|  / \  |  _ \|  \/  | ____|
+| |_) |  _|   / _ \ | | | | |\/| |  _|  
+|  _ <| |___ / ___ \| |_| | |  | | |___ 
+|_| \_\_____/_/   \_\____/|_|  |_|_____|
+
+
+The steps of the springfitting process are divided upon seperate folders.
+Each folder has its own calc_script
+
+The file fitted_parameters summarizes all findings
+
+
+
+currently, the following steps have been carried out in a subsequent manner
+ _________________
+|vacuum_nopreload:|
+ ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+fitting of rotational spring; fitting parameter is the eigen frequency (~75Hz)
+
+
+ __________________
+|static_deflection |
+ ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+fitting of the linear spring; fitting parameter is the central displacement with regards to the applied pressure
+
+
+ __________________
+| material_damping |
+ ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+fitting of the MDAMP parameter; fitting parameter is the exponential decay of the oscillation amplitude
+ 
+ 
+ _____________
+| aero_damping |
+ ‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+fitting of the damping properties of the cavity; fitting parameter is the eigenfrequncy of the non-vacuum experiments

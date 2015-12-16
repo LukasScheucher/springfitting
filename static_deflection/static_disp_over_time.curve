@@ -1,0 +1,14 @@
+steps 5 nnodes 1
+202 1 1
+# y disps at 1 nodes
+# time node 202 y for simulation with rotating springs
+#
+10.0e+03   -2.70e-01
+15.0e+03   -3.28e-01
+20.0e+03   -3.55e-01
+25.0e+03   -4.00e-01
+30.0e+03   -4.20e-01
+35.0e+03   -4.49e-01
+40.0e+03   -4.75e-01
+45.0e+03   -4.94e-01
+50.0e+03   -5.20e-01

@@ -1,0 +1,17 @@
+DIR='/scratch/scheucher/workspace/baci_springfitting/transfer/vacuum_nopreload'
+PRE='/scratch/scheucher/workspace/baci_springfitting_release/pre_exodus'
+MAIN='/scratch/scheucher/workspace/baci_springfitting_release/baci-release'
+POST='/scratch/scheucher/workspace/baci_springfitting_release/post_processor'
+
+rm $DIR/out/*
+rm $DIR/ens/*
+rm $DIR/dat/*
+
+
+
+$PRE --exo=$DIR/plate.exo --bc=$DIR/vacuum_nopreload.bc --head=$DIR/vacuum_nopreload.head --dat=$DIR/dat/vacuum_nopreload.dat
+
+mpirun -np 3 $MAIN $DIR/dat/vacuum_nopreload.dat $DIR/out/vacuum_nopreload
+
+$POST --filter=ensight --file=$DIR/out/vacuum_nopreload --output=$DIR/ens/vacuum_nopreload --stress=cxyz_ndxyz
+

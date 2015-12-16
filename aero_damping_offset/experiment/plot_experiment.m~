@@ -1,0 +1,1 @@
+A=dlmread('Damping_elasticpanel_magnetpulse_DP',' ',12)

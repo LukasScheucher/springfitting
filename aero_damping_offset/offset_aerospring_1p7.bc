@@ -1,0 +1,1175 @@
+----------- Mesh contents -----------
+
+Mesh consists of 666 Nodes, 220 Elements, organized in 
+2 ElementBlocks, 9 NodeSets, 0 SideSets 
+
+---------- Syntax examples ----------
+
+Element Block, named: 
+of Shape: TET4
+has 9417816 Elements
+'*eb0="ELEMENT"'
+sectionname="FLUID"
+description="MAT 1 NA Euler"
+elementname="FLUID" 
+
+Element Block, named: 
+of Shape: HEX8
+has 9417816 Elements
+'*eb0="ELEMENT"'
+sectionname="STRUCTURE"
+description="MAT 1 KINEM nonlinear EAS none"
+elementname="SOLIDH8" 
+
+Node Set, named:
+Property Name: INFLOW
+has 45107 Nodes
+'*ns0="CONDITION"'
+sectionname="DESIGN SURF DIRICH CONDITIONS"
+description="NUMDOF 6 ONOFF 1 1 1 0 0 0 VAL 2.0 0.0 0.0 0.0 0.0 0.0 CURVE 1 none none none none none FUNCT 1 0 0 0 0 0"
+
+MIND that you can specify a condition also on an ElementBlock, just replace 'ELEMENT' with 'CONDITION'
+The 'E num' in the dat-file depends on the order of the specification below
+------------------------------------------------BCSPECS
+
+Element Block, named: panel
+of Shape: HEX8
+has 200 Elements
+*eb1="ELEMENT"
+sectionname="STRUCTURE"
+description="MAT 1 KINEM nonlinear EAS full"
+elementname="SOLIDH8" 
+
+Element Block, named: clamping_blocks
+of Shape: HEX8
+has 20 Elements
+*eb2="ELEMENT"
+sectionname="STRUCTURE"
+description="MAT 2 KINEM linear EAS none"
+elementname="SOLIDH8"
+
+Element Block, named: auxilary_blocks
+of Shape: HEX8
+has 20 Elements
+*eb3="ELEMENT"
+sectionname="STRUCTURE"
+description="MAT 3 KINEM linear EAS none"
+elementname="SOLIDH8" 
+
+Node Set, named: coupling_surf
+Property Name: none
+has 202 Nodes
+*ns1="CONDITION"
+sectionname="DESIGN FSI COUPLING SURF CONDITIONS"
+description="0 structure"
+
+Node Set, named: clamping_surf_bottom
+Property Name: none
+has 24 Nodes
+ns2="CONDITION"
+sectionname="DESIGN SURF SPRING DASHPOT CONDITIONS"
+description="NUM_SPRING_STIFF_TENS 1 SPRING_STIFF_TENS 31.98 0.0 0.0 NUM_SPRING_STIFF_COMP 1 SPRING_STIFF_COMP 31.98 0.0 0.0 SPRING_OFFSET 0.0 DASHPOT_VISCOSITY 0.0 DIRECTION z COUPLING -1"
+
+Node Set, named: bottom_surf_pinf
+Property Name: none
+has 202 Nodes
+*ns4="CONDITION"
+sectionname="DESIGN SURF NEUMANN CONDITIONS"
+description="NUMDOF 3 ONOFF 1 0 0 VAL 1.7e-5 0.0 0.0 CURVE 1 none none FUNCT 0 0 0 orthopressure Mid"
+
+Node Set, named: bottom_surf_pinf_for_aero_spring
+Property Name: none
+has 202 Nodes
+*ns4="CONDITION"
+sectionname="DESIGN SURF NEUMANN CONDITIONS"
+description="NUMDOF 3 ONOFF 1 0 0 VAL 1.0 0.0 0.0 CURVE none none none FUNCT 0 0 0 orthopressure_scaled Mid"
+
+Node Set, named: symmsurface
+Property Name: none
+has 666 Nodes
+*ns5="CONDITION"
+sectionname="DESIGN SURF DIRICH CONDITIONS"
+description="NUMDOF 3 ONOFF 0 0 1 VAL 0.0 0.0 0.0 CURVE none none none FUNCT 0 0 0"
+
+Node Set, named: clamping_lines
+Property Name: none
+has 12 Nodes
+*ns2="CONDITION"
+sectionname="DESIGN LINE DIRICH CONDITIONS"
+description="NUMDOF 3 ONOFF 0 1 1 VAL 0.0 0.0 0.0 CURVE none none none FUNCT 0 0 0"
+
+Node Set, named: auxilary_dirichlet_surface
+Property Name: none
+has 666 Nodes
+*ns11="CONDITION"
+sectionname="DESIGN SURF DIRICH CONDITIONS"
+description="NUMDOF 3 ONOFF 1 1 1 VAL 0.0 0.0 0.0 CURVE none none none FUNCT 0 0 0"
+
+Node Set, named: clamping_blocks_nodes
+Property Name: none
+has 72 Nodes
+ns10="CONDITION" //auskommentiert
+sectionname="DESIGN POINT DIRICH CONDITIONS"
+description="NUMDOF 3 ONOFF 0 1 1 VAL 0.0 0.0 0.0 CURVE none none none FUNCT 0 0 0"
+
+Node Set, named: nodes_filter_rigid
+Property Name: none
+has 72 Nodes
+ns13="CONDITION" //auskommentiert
+sectionname="DESIGN POINT DIRICH CONDITIONS"
+description="NUMDOF 3 ONOFF 1 0 0 VAL 0.0 0.0 0.0 CURVE none none none FUNCT 0 0 0"
+
+Node Set, named: nodes_all
+Property Name: none
+has 72 Nodes
+ns12="CONDITION"
+sectionname="DESIGN VOL INITIAL FIELD CONDITIONS"
+description="Velocity 1"
+
+Node Set, named: clamping_blocks_right_left_spring_y
+Property Name: none
+has 12 Nodes
+*ns7="CONDITION"
+sectionname="DESIGN SURF SPRING DASHPOT CONDITIONS"
+description="NUM_SPRING_STIFF_TENS 1 SPRING_STIFF_TENS 0.80 0.0 0.0 NUM_SPRING_STIFF_COMP 1 SPRING_STIFF_COMP 0.80 0.0 0.0 SPRING_OFFSET 0.0 DASHPOT_VISCOSITY 0.0 DIRECTION y COUPLING -1"
+
+Node Set, named: clamping_line_spring_x
+Property Name: none
+has 12 Nodes
+*ns2="CONDITION"
+sectionname="DESIGN LINE SPRING DASHPOT CONDITIONS"
+description="NUM_SPRING_STIFF_TENS 1 SPRING_STIFF_TENS 25.3039 0.0 0.0 NUM_SPRING_STIFF_COMP 1 SPRING_STIFF_COMP 25.3039 0.0 0.0 SPRING_OFFSET 0.0 DASHPOT_VISCOSITY 0.0 DIRECTION x COUPLING -1"
+
+-----------------------------------------VALIDCONDITIONS
+------------------------------------DESIGN POINT NEUMANN CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+----------------------------------DESIGN POINT MOMENT EB CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+-------------------------------------DESIGN LINE NEUMANN CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+-------------------------------------DESIGN SURF NEUMANN CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+--------------------------------------DESIGN VOL NEUMANN CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+--------------------------DESIGN POINT TRANSPORT NEUMANN CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+---------------------------DESIGN LINE TRANSPORT NEUMANN CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+---------------------------DESIGN SURF TRANSPORT NEUMANN CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+-----------------------------DESIGN POINT THERMO NEUMANN CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+------------------------------DESIGN LINE THERMO NEUMANN CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+------------------------------DESIGN SURF THERMO NEUMANN CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+-------------------------------DESIGN VOL THERMO NEUMANN CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+-------------------------------DESIGN XFEM POINT NEUMANN CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+--------------------------------DESIGN XFEM LINE NEUMANN CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+--------------------------------DESIGN XFEM SURF NEUMANN CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+---------------------------------DESIGN XFEM VOL NEUMANN CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+-------------------------------DESIGN POINT PORO NEUMANN CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+--------------------------------DESIGN LINE PORO NEUMANN CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+--------------------------------DESIGN SURF PORO NEUMANN CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+---------------------------------DESIGN VOL PORO NEUMANN CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+-------------------------------------DESIGN POINT DIRICH CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+--------------------------------------DESIGN LINE DIRICH CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+--------------------------------------DESIGN SURF DIRICH CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+---------------------------------------DESIGN VOL DIRICH CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+----------------------------------DESIGN PARTICLE DIRICH CONDITIONS
+DPARTICLE                       0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+---------------------------------DESIGN POINT ALE DIRICH CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+----------------------------------DESIGN LINE ALE DIRICH CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+----------------------------------DESIGN SURF ALE DIRICH CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+-----------------------------------DESIGN VOL ALE DIRICH CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+---------------------------DESIGN POINT TRANSPORT DIRICH CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+----------------------------DESIGN LINE TRANSPORT DIRICH CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+----------------------------DESIGN SURF TRANSPORT DIRICH CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+-----------------------------DESIGN VOL TRANSPORT DIRICH CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+------------------------------DESIGN POINT THERMO DIRICH CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+-------------------------------DESIGN LINE THERMO DIRICH CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+-------------------------------DESIGN SURF THERMO DIRICH CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+--------------------------------DESIGN VOL THERMO DIRICH CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+--------------------------------DESIGN POINT PORO DIRICH CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+---------------------------------DESIGN LINE PORO DIRICH CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+---------------------------------DESIGN SURF PORO DIRICH CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+----------------------------------DESIGN VOL PORO DIRICH CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+----------------------------DESIGN POINT NURBS LS DIRICH CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+-----------------------------DESIGN LINE NURBS LS DIRICH CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+-----------------------------DESIGN SURF NURBS LS DIRICH CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+------------------------------DESIGN VOL NURBS LS DIRICH CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+------------------------------DESIGN POINT INITIAL FIELD CONDITIONS
+DPOINT                          0
+//E num - Undefined 0  
+-------------------------------DESIGN LINE INITIAL FIELD CONDITIONS
+DLINE                           0
+//E num - Undefined 0  
+-------------------------------DESIGN SURF INITIAL FIELD CONDITIONS
+DSURF                           0
+//E num - Undefined 0  
+--------------------------------DESIGN VOL INITIAL FIELD CONDITIONS
+DVOL                            0
+//E num - Undefined 0  
+---------------------------DESIGN PARTICLE INITIAL FIELD CONDITIONS
+DPARTICLE                       0
+//E num - Undefined 0  
+-----------------------DESIGN POINT THERMO INITIAL FIELD CONDITIONS
+DPOINT                          0
+//E num - Undefined 0  
+------------------------DESIGN LINE THERMO INITIAL FIELD CONDITIONS
+DLINE                           0
+//E num - Undefined 0  
+------------------------DESIGN SURF THERMO INITIAL FIELD CONDITIONS
+DSURF                           0
+//E num - Undefined 0  
+-------------------------DESIGN VOL THERMO INITIAL FIELD CONDITIONS
+DVOL                            0
+//E num - Undefined 0  
+-----------------------------DESIGN DOMAIN INTEGRAL SURF CONDITIONS
+DSURF                           0
+//E num - ID 0 
+------------------------------DESIGN DOMAIN INTEGRAL VOL CONDITIONS
+DVOL                            0
+//E num - ID 0 
+---------------------------DESIGN BOUNDARY INTEGRAL SURF CONDITIONS
+DSURF                           0
+//E num - ID 0 
+---------------------------------DESIGN LINE ALE WEAR CONDITIONS 2D
+DLINE                           0
+//E num - 
+----------------------------------DESIGN SURFACE WEAR CONDITIONS 3D
+DSURF                           0
+//E num - 
+-------------------------------------DESIGN POINT LOCSYS CONDITIONS
+DPOINT                          0
+//E num - ROTANGLE 0.0 0.0 0.0  CURVE none none none  FUNCT 0 0 0  USEUPDATEDNODEPOS 0  
+--------------------------------------DESIGN LINE LOCSYS CONDITIONS
+DLINE                           0
+//E num - ROTANGLE 0.0 0.0 0.0  CURVE none none none  FUNCT 0 0 0  USEUPDATEDNODEPOS 0  USECONSISTENTNODENORMAL 0  
+--------------------------------------DESIGN SURF LOCSYS CONDITIONS
+DSURF                           0
+//E num - ROTANGLE 0.0 0.0 0.0  CURVE none none none  FUNCT 0 0 0  USEUPDATEDNODEPOS 0  USECONSISTENTNODENORMAL 0  
+---------------------------------------DESIGN VOL LOCSYS CONDITIONS
+DVOL                            0
+//E num - ROTANGLE 0.0 0.0 0.0  CURVE none none none  FUNCT 0 0 0  USEUPDATEDNODEPOS 0  
+---------------------------------DESIGN POINT ALE LOCSYS CONDITIONS
+DPOINT                          0
+//E num - ROTANGLE 0.0 0.0 0.0  CURVE none none none  FUNCT 0 0 0  USEUPDATEDNODEPOS 0  
+----------------------------------DESIGN LINE ALE LOCSYS CONDITIONS
+DLINE                           0
+//E num - ROTANGLE 0.0 0.0 0.0  CURVE none none none  FUNCT 0 0 0  USEUPDATEDNODEPOS 0  USECONSISTENTNODENORMAL 0  
+----------------------------------DESIGN SURF ALE LOCSYS CONDITIONS
+DSURF                           0
+//E num - ROTANGLE 0.0 0.0 0.0  CURVE none none none  FUNCT 0 0 0  USEUPDATEDNODEPOS 0  USECONSISTENTNODENORMAL 0  
+-----------------------------------DESIGN VOL ALE LOCSYS CONDITIONS
+DVOL                            0
+//E num - ROTANGLE 0.0 0.0 0.0  CURVE none none none  FUNCT 0 0 0  USEUPDATEDNODEPOS 0  
+---------------------------DESIGN LINE PERIODIC BOUNDARY CONDITIONS
+DLINE                           0
+//E num - 0 Master PLANE xy LAYER 0 ANGLE 0.0 ABSTREETOL 0.0 
+---------------------------DESIGN SURF PERIODIC BOUNDARY CONDITIONS
+DSURF                           0
+//E num - 0 Master PLANE xy LAYER 0 ANGLE 0.0 ABSTREETOL 0.0 
+------------------------------DESIGN LINE WEAK DIRICHLET CONDITIONS
+DLINE                           0
+//E num - adjoint-consistent all_directions constant 0.0 lin_all 0.0 0.0 0.0  none none none  0 0 0  
+---------------------------DESIGN SURFACE WEAK DIRICHLET CONDITIONS
+DSURF                           0
+//E num - adjoint-consistent all_directions constant 0.0 lin_all 0.0 0.0 0.0  none none none  0 0 0  
+---------------------DESIGN PATCH RECOVERY BOUNDARY LINE CONDITIONS
+DLINE                           0
+//E num - 
+---------------------DESIGN PATCH RECOVERY BOUNDARY SURF CONDITIONS
+DSURF                           0
+//E num - 
+--------------------------------DESIGN SURFACE VOLUME CONSTRAINT 3D
+DSURF                           0
+//E num - 0 none 0.0 none 
+----------------------------DESIGN SURFACE VOLUME CONSTRAINT 3D PEN
+DSURF                           0
+//E num - 0 none 0.0 0.0 0.0 none 
+----------------------------------DESIGN SURFACE AREA CONSTRAINT 3D
+DSURF                           0
+//E num - 0 none 0.0 
+------------------------------DESIGN SURFACE AREA CONSTRAINT 3D PEN
+DSURF                           0
+//E num - 0 none 0.0 0.0 0.0 none 
+-----------------------------------DESIGN SURFACE VOLUME MONITOR 3D
+DSURF                           0
+//E num - 0 
+-------------------------------------DESIGN SURFACE AREA MONITOR 3D
+DSURF                           0
+//E num - 0 none 
+-------------------------------------DESIGN LINE AREA CONSTRAINT 2D
+DLINE                           0
+//E num - 0 none 0.0 
+----------------------------------------DESIGN LINE AREA MONITOR 2D
+DLINE                           0
+//E num - 0 
+------------------------------DESIGN SURFACE MULTIPNT CONSTRAINT 3D
+DSURF                           0
+//E num - 0 0.0 none 0.0 0 0 0  rel 
+--------------------DESIGN SURFACE NORMALDIR MULTIPNT CONSTRAINT 3D
+DSURF                           0
+//E num - 0 0.0 none 0.0 0 0.0 0.0 0.0  disp rel 
+----------------DESIGN SURFACE NORMALDIR MULTIPNT CONSTRAINT 3D PEN
+DSURF                           0
+//E num - 0 0.0 none 0.0 0.0 0 0.0 0.0 0.0  disp rel 
+---------------------------------DESIGN LINE MULTIPNT CONSTRAINT 2D
+DLINE                           0
+//E num - 0 0.0 none 0 0 0 dist 0.0 
+-----------------------DESIGN SURF MODE FOR KRYLOV SPACE PROJECTION
+DSURF                           0
+//E num - fluid NUMMODES 0 ONOFF 0  integration 
+------------------------DESIGN VOL MODE FOR KRYLOV SPACE PROJECTION
+DVOL                            0
+//E num - fluid NUMMODES 0 ONOFF 0  integration 
+---------------------------DESIGN LINE MORTAR CONTACT CONDITIONS 2D
+DLINE                           0
+//E num - 0 Master Inactive FrCoeffOrBound 0.0 AdhesionBound 0.0 Solidcontact 
+---------------------------DESIGN SURF MORTAR CONTACT CONDITIONS 3D
+DSURF                           0
+//E num - 0 Master Inactive FrCoeffOrBound 0.0 AdhesionBound 0.0 Solidcontact 
+--------------------------DESIGN LINE MORTAR COUPLING CONDITIONS 2D
+DLINE                           0
+//E num - 0 Master Inactive 
+--------------------------DESIGN SURF MORTAR COUPLING CONDITIONS 3D
+DSURF                           0
+//E num - 0 Master Inactive 
+--------------------------DESIGN LINE MORTAR SYMMETRY CONDITIONS 3D
+DLINE                           0
+//E num - ONOFF 0 0 0  
+----------------------DESIGN POINT MORTAR SYMMETRY CONDITIONS 2D/3D
+DPOINT                          0
+//E num - ONOFF 0 0 0  
+------------------------DESIGN S2I COUPLING LINE CONDITIONS / SLAVE
+DLINE                           0
+//E num - KineticModel ConstantPermeability numscal 0 permeabilities   
+------------------------DESIGN S2I COUPLING SURF CONDITIONS / SLAVE
+DSURF                           0
+//E num - KineticModel ConstantPermeability numscal 0 permeabilities   
+-----------------------DESIGN S2I COUPLING LINE CONDITIONS / MASTER
+DLINE                           0
+//E num - 
+-----------------------DESIGN S2I COUPLING SURF CONDITIONS / MASTER
+DSURF                           0
+//E num - 
+-----------------DESIGN S2I COUPLING SURF CONDITIONS / PARTITIONING
+DSURF                           0
+//E num - 
+------------------DESIGN S2I COUPLING VOL CONDITIONS / PARTITIONING
+DVOL                            0
+//E num - 
+-----------------------------------SCATRA FLUX CALC LINE CONDITIONS
+DLINE                           0
+//E num - OUTPUT standard 
+-----------------------------------SCATRA FLUX CALC SURF CONDITIONS
+DSURF                           0
+//E num - OUTPUT standard 
+-----------------------------DESIGN SCATRA COUPLING SURF CONDITIONS
+DSURF                           0
+//E num - NUMSCAL 0 ONOFF 0 0  COUPID 0 PERMCOEF 0.0 CONDUCT 0.0 FILTR 0.0 WSSONOFF 0 WSSCOEFFS 0.0 0.0 0.0  
+---------------------------------------SCATRA ROBIN LINE CONDITIONS
+DLINE                           0
+//E num - Prefactor 0.0 
+---------------------------------------SCATRA ROBIN SURF CONDITIONS
+DSURF                           0
+//E num - Prefactor 0.0 
+---------------------------TRANSPORT NEUMANN INFLOW LINE CONDITIONS
+DLINE                           0
+//E num - 
+---------------------------TRANSPORT NEUMANN INFLOW SURF CONDITIONS
+DSURF                           0
+//E num - 
+--------------------DESIGN ELECTRODE STATE OF CHARGE VOL CONDITIONS
+DVOL                            0
+//E num - ID 0 c_0% 0.0 c_100% 0.0 
+--------------------------------DESIGN CELL VOLTAGE LINE CONDITIONS
+DLINE                           0
+//E num - ID 0 
+--------------------------------DESIGN CELL VOLTAGE SURF CONDITIONS
+DSURF                           0
+//E num - ID 0 
+-----------------------ELECTRODE BOUNDARY KINETICS POINT CONDITIONS
+DPOINT                          0
+//E num - ID 0 pot 0.0 curve none numscal 0 stoich 0 0  e- 0 epsilon 0.0 zero_cur 0 Butler-Volmer alpha_a 0.0 alpha_c 0.0 i0 0.0 gamma 0.0 refcon 0.0 dl_spec_cap 0.0 END  
+------------------------ELECTRODE BOUNDARY KINETICS LINE CONDITIONS
+DLINE                           0
+//E num - ID 0 pot 0.0 curve none numscal 0 stoich 0 0  e- 0 epsilon 0.0 zero_cur 0 Butler-Volmer alpha_a 0.0 alpha_c 0.0 i0 0.0 gamma 0.0 refcon 0.0 dl_spec_cap 0.0 END  
+------------------------ELECTRODE BOUNDARY KINETICS SURF CONDITIONS
+DSURF                           0
+//E num - ID 0 pot 0.0 curve none numscal 0 stoich 0 0  e- 0 epsilon 0.0 zero_cur 0 Butler-Volmer alpha_a 0.0 alpha_c 0.0 i0 0.0 gamma 0.0 refcon 0.0 dl_spec_cap 0.0 END  
+--------------------------ELECTRODE DOMAIN KINETICS LINE CONDITIONS
+DLINE                           0
+//E num - ID 0 pot 0.0 curve none numscal 0 stoich 0 0  e- 0 zero_cur 0 Butler-Volmer A_s 0.0 alpha_a 0.0 alpha_c 0.0 i0 0.0 gamma 0.0 refcon 0.0 dl_spec_cap 0.0 END  
+--------------------------ELECTRODE DOMAIN KINETICS SURF CONDITIONS
+DSURF                           0
+//E num - ID 0 pot 0.0 curve none numscal 0 stoich 0 0  e- 0 zero_cur 0 Butler-Volmer A_s 0.0 alpha_a 0.0 alpha_c 0.0 i0 0.0 gamma 0.0 refcon 0.0 dl_spec_cap 0.0 END  
+---------------------------ELECTRODE DOMAIN KINETICS VOL CONDITIONS
+DVOL                            0
+//E num - ID 0 pot 0.0 curve none numscal 0 stoich 0 0  e- 0 zero_cur 0 Butler-Volmer A_s 0.0 alpha_a 0.0 alpha_c 0.0 i0 0.0 gamma 0.0 refcon 0.0 dl_spec_cap 0.0 END  
+------------------------------DESIGN SURF TURBULENT INFLOW TRANSFER
+DSURF                           0
+//E num - ID 0 master DIRECTION x none  
+--------------------------------------FLUID TURBULENT INFLOW VOLUME
+DVOL                            0
+//E num - 
+--------------------------------------COMBUST BLEND MATERIAL VOLUME
+DVOL                            0
+//E num - 0  none  plus 
+---------------------DESIGN LINE FLOW-DEPENDENT PRESSURE CONDITIONS
+DLINE                           0
+//E num - flow_rate 0.0 0.0 0.0 0.0 0.0 none 
+------------------DESIGN SURFACE FLOW-DEPENDENT PRESSURE CONDITIONS
+DSURF                           0
+//E num - flow_rate 0.0 0.0 0.0 0.0 0.0 none 
+-----------DESIGN LINE SLIP SUPPLEMENTAL CURVED BOUNDARY CONDITIONS
+DLINE                           0
+//E num - USEUPDATEDNODEPOS 0  
+--------DESIGN SURFACE SLIP SUPPLEMENTAL CURVED BOUNDARY CONDITIONS
+DSURF                           0
+//E num - USEUPDATEDNODEPOS 0  
+------------------------DESIGN LINE NAVIER-SLIP BOUNDARY CONDITIONS
+DLINE                           0
+//E num - SLIPCOEFFICIENT 0.0 
+------------------------DESIGN SURF NAVIER-SLIP BOUNDARY CONDITIONS
+DSURF                           0
+//E num - SLIPCOEFFICIENT 0.0 
+--------------------DESIGN SURFACE CONSERVATIVE OUTFLOW CONSISTENCY
+DSURF                           0
+//E num - 
+-------------------------------FLUID NEUMANN INFLOW LINE CONDITIONS
+DLINE                           0
+//E num - 
+-------------------------------FLUID NEUMANN INFLOW SURF CONDITIONS
+DSURF                           0
+//E num - 
+----------------------DESIGN LINE MIXED/HYBRID DIRICHLET CONDITIONS
+DLINE                           0
+//E num - 0.0 0.0 0.0  none none none  0 0 0  0.0 constant 0.0 at_wall 
+-------------------DESIGN SURFACE MIXED/HYBRID DIRICHLET CONDITIONS
+DSURF                           0
+//E num - 0.0 0.0 0.0  none none none  0 0 0  0.0 constant 0.0 at_wall 
+-----------------------------------------SURFACE TENSION CONDITIONS
+DSURF                           0
+//E num - none gamma 0.0 
+--------------------------DESIGN FLUID FREE SURFACE LINE CONDITIONS
+DLINE                           0
+//E num - FIELD fluid COUPLING lagrange VAL 0.0  NODENORMALFUNCT 0 
+--------------------------DESIGN FLUID FREE SURFACE SURF CONDITIONS
+DSURF                           0
+//E num - FIELD fluid COUPLING lagrange VAL 0.0  NODENORMALFUNCT 0 
+---------------------------DESIGN FLUID STRESS CALC LINE CONDITIONS
+DLINE                           0
+//E num - 
+---------------------------DESIGN FLUID STRESS CALC SURF CONDITIONS
+DSURF                           0
+//E num - 
+----------------------------------------DESIGN FLUID LINE LIFT&DRAG
+DLINE                           0
+//E num - 0 CENTER 0.0 0.0 0.0  AXIS 0.0 0.0 0.0  
+----------------------------------------DESIGN FLUID SURF LIFT&DRAG
+DSURF                           0
+//E num - 0 CENTER 0.0 0.0 0.0  AXIS 0.0 0.0 0.0  
+-----------------------------------DESIGN FLOW RATE LINE CONDITIONS
+DLINE                           0
+//E num - 0 
+-----------------------------------DESIGN FLOW RATE SURF CONDITIONS
+DSURF                           0
+//E num - 0 
+---------------------------------DESIGN IMPULS RATE SURF CONDITIONS
+DSURF                           0
+//E num - 0 
+-----------------------------DESIGN SURF VOLUMETRIC FLOW CONDITIONS
+DSURF                           0
+//E num - 0 WOMERSLEY NOTPREBIASED InFlow WithOutCorrection Period 0.0 Order 0 Harmonics 0 Val 0.0 Curve 0 SelfEvaluateNormal 0.0 0.0 0.0 SelfEvaluateCenterOfMass 0.0 0.0 0.0 
+---------------------------DESIGN LINE VOLUMETRIC FLOW BORDER NODES
+DLINE                           0
+//E num - 0 
+-------------------DESIGN SURF TOTAL TRACTION CORRECTION CONDITIONS
+DSURF                           0
+//E num - 0 POLYNOMIAL NOTPREBIASED InFlow WithOutCorrection Period 0.0 Order 0 Harmonics 0 Val 0.0 Curve 0 SelfEvaluateNormal 0.0 0.0 0.0 SelfEvaluateCenterOfMass 0.0 0.0 0.0 
+-----------------DESIGN LINE TOTAL TRACTION CORRECTION BORDER NODES
+DLINE                           0
+//E num - 0 
+---------------------DESIGN SURFACE NORMAL NO PENETRATION CONDITION
+DSURF                           0
+//E num - 
+------------------------DESIGN LINE NORMAL NO PENETRATION CONDITION
+DLINE                           0
+//E num - 
+-------------------------------DESIGN VOLUME POROCOUPLING CONDITION
+DVOL                            0
+//E num - 
+------------------------------DESIGN SURFACE POROCOUPLING CONDITION
+DSURF                           0
+//E num - 
+----------------------------DESIGN SURFACE PORO PARTIAL INTEGRATION
+DSURF                           0
+//E num - 
+-------------------------------DESIGN LINE PORO PARTIAL INTEGRATION
+DLINE                           0
+//E num - 
+---------------------------DESIGN SURFACE PORO PRESSURE INTEGRATION
+DSURF                           0
+//E num - 
+------------------------------DESIGN LINE PORO PRESSURE INTEGRATION
+DLINE                           0
+//E num - 
+-----------------------DESIGN FLUCTHYDRO STATISTICS SURF CONDITIONS
+DSURF                           0
+//E num - 0 nodalbased 
+-----------------------DESIGN FLUCTHYDRO STATISTICS LINE CONDITIONS
+DLINE                           0
+//E num - 0 nodalbased 
+----------------------------------DESIGN ALE UPDATE LINE CONDITIONS
+DLINE                           0
+//E num - COUPLING lagrange VAL 0.0  NODENORMALFUNCT 0 
+----------------------------------DESIGN ALE UPDATE SURF CONDITIONS
+DSURF                           0
+//E num - COUPLING lagrange VAL 0.0  NODENORMALFUNCT 0 
+--------------------------------DESIGN FSI COUPLING LINE CONDITIONS
+DLINE                           0
+//E num - 0 
+--------------------------------DESIGN FSI COUPLING SURF CONDITIONS
+DSURF                           0
+//E num - 0 
+-----------------------DESIGN FSI COUPLING NO SLIDE LINE CONDITIONS
+DLINE                           0
+//E num - 
+-----------------------DESIGN FSI COUPLING NO SLIDE SURF CONDITIONS
+DSURF                           0
+//E num - 
+--------------------DESIGN FSI COUPLING CENTER DISP LINE CONDITIONS
+DLINE                           0
+//E num - 
+--------------------DESIGN FSI COUPLING CENTER DISP SURF CONDITIONS
+DSURF                           0
+//E num - 
+----------------------DESIGN STRUCTURE ALE COUPLING SURF CONDITIONS
+DSURF                           0
+//E num - 0 structure 
+-------------DESIGN STRUCTURE FLUID VOLUME COUPLING SURF CONDITIONS
+DSURF                           0
+//E num - 0 structure 
+--------------DESIGN STRUCTURE FLUID VOLUME COUPLING VOL CONDITIONS
+DVOL                            0
+//E num - 0 structure 
+-------------------------------DESIGN FPSI COUPLING LINE CONDITIONS
+DLINE                           0
+//E num - 0 
+-------------------------------DESIGN FPSI COUPLING SURF CONDITIONS
+DSURF                           0
+//E num - 0 
+---------------------------------DESIGN SURFACE NEUMANN INTEGRATION
+DSURF                           0
+//E num - 
+------------------------------------DESIGN LINE NEUMANN INTEGRATION
+DLINE                           0
+//E num - 
+-----------------------------------DESIGN VOLUME IMMERSED SEARCHBOX
+DVOL                            0
+//E num - 
+---------------------------DESIGN IMMERSED COUPLING LINE CONDITIONS
+DLINE                           0
+//E num - 0 
+---------------------------DESIGN IMMERSED COUPLING SURF CONDITIONS
+DSURF                           0
+//E num - 0 
+------------------------DESIGN FLUID FLUID COUPLING SURF CONDITIONS
+DSURF                           0
+//E num - 0 
+-----------------------------------DESIGN FLUID MESH VOL CONDITIONS
+DVOL                            0
+//E num - 0 
+--------------------------DESIGN ALE FLUID COUPLING SURF CONDITIONS
+DSURF                           0
+//E num - 0 
+---------------------------DESIGN XFEM DISPLACEMENT SURF CONDITIONS
+DSURF                           0
+//E num - COUPLINGID 0  EVALTYPE funct NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+-----------------DESIGN XFEM LEVELSET WEAK DIRICHLET VOL CONDITIONS
+DVOL                            0
+//E num - LEVELSETFIELDNO 0  LEVELSETCURVE none  NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+------------------------DESIGN XFEM LEVELSET NEUMANN VOL CONDITIONS
+DVOL                            0
+//E num - LEVELSETFIELDNO 0  LEVELSETCURVE none  NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+-----------------------DESIGN XFEM LEVELSET TWOPHASE VOL CONDITIONS
+DVOL                            0
+//E num - LEVELSETFIELDNO 0  LEVELSETCURVE none  
+---------------------DESIGN XFEM LEVELSET COMBUSTION VOL CONDITIONS
+DVOL                            0
+//E num - LEVELSETFIELDNO 0  LEVELSETCURVE none  
+-----------------------------DESIGN XFEM FLUIDFLUID SURF CONDITIONS
+DSURF                           0
+//E num - 0 xfluid 
+------------------------DESIGN XFEM FSI PARTITIONED SURF CONDITIONS
+DSURF                           0
+//E num - 
+-------------------------DESIGN XFEM FSI MONOLITHIC SURF CONDITIONS
+DSURF                           0
+//E num - 
+------------------DESIGN XFEM CRACK FSI PARTITIONED SURF CONDITIONS
+DSURF                           0
+//E num - 
+-------------------------DESIGN XFEM WEAK DIRICHLET SURF CONDITIONS
+DSURF                           0
+//E num - COUPLINGID 0  EVALTYPE funct_interpolated NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+--------------------------------DESIGN XFEM NEUMANN SURF CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   Live Mid 
+----------------------------------------DESIGN CRACK MASTER SURFACE
+DSURF                           0
+//E num - 
+-----------------------------------------DESIGN CRACK SLAVE SURFACE
+DSURF                           0
+//E num - 
+-------------------------------------DESIGN CRACK INITIATION POINTS
+DPOINT                          0
+//E num - 
+---------------------------------------DESIGN CRACK BOUNDARY POINTS
+DPOINT                          0
+//E num - 
+------------------------------------DESIGN CRACK INNER LAYER POINTS
+DPOINT                          0
+//E num - 
+------------------------------------DESIGN CRACK OUTER LAYER POINTS
+DPOINT                          0
+//E num - 
+---------------------------------DESIGN VOL LJ_POTENTIAL CONDITIONS
+DVOL                            0
+//E num - none label 0 depth 0.0 rootDist 0.0 cutOff 0.0 exvollength 0.0 beta 0.0 
+--------------------------------DESIGN SURF LJ_POTENTIAL CONDITIONS
+DSURF                           0
+//E num - none label 0 depth 0.0 rootDist 0.0 cutOff 0.0 exvollength 0.0 beta 0.0 
+--------------------------------DESIGN LINE LJ_POTENTIAL CONDITIONS
+DLINE                           0
+//E num - none label 0 depth 0.0 rootDist 0.0 cutOff 0.0 exvollength 0.0 beta 0.0 
+----------------------DESIGN VOL VAN DER WAALS POTENTIAL CONDITIONS
+DVOL                            0
+//E num - none label 0 lambda 0.0 cutOff 0.0 beta 0.0 exvollength 0.0 
+---------------------DESIGN SURF VAN DER WAALS POTENTIAL CONDITIONS
+DSURF                           0
+//E num - none label 0 lambda 0.0 cutOff 0.0 beta 0.0 exvollength 0.0 
+---------------------DESIGN LINE VAN DER WAALS POTENTIAL CONDITIONS
+DLINE                           0
+//E num - none label 0 lambda 0.0 cutOff 0.0 beta 0.0 exvollength 0.0 
+---------------------------DESIGN SURF ELECTRO REPULSION CONDITIONS
+DSURF                           0
+//E num - none label 0 zeta_param_1 0.0 zeta_param_2 0.0 cutOff 0.0 beta 0.0 
+---------------------------DESIGN LINE ELECTRO REPULSION CONDITIONS
+DLINE                           0
+//E num - none label 0 zeta_param_1 0.0 zeta_param_2 0.0 cutOff 0.0 beta 0.0 
+-----------------------DESIGN LINE BEAM POTENTIAL CHARGE CONDITIONS
+DLINE                           0
+//E num - POTLAW 0 VAL 0.0  FUNCT 0  
+----------------------------------------DESIGN SURFACE INV ANALYSIS
+DSURF                           0
+//E num - 0 
+------------------------DESIGN SURFACE CURRENT EVALUATION CONDITION
+DSURF                           0
+//E num - 0 
+---------------------------------DESIGN UNCERTAIN SURFACE CONDITION
+DSURF                           0
+//E num - 0 
+-----------------------------DESIGN POINT BIOFILM DIRICH CONDITIONS
+DPOINT                          0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+------------------------------DESIGN LINE BIOFILM DIRICH CONDITIONS
+DLINE                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+------------------------------DESIGN SURF BIOFILM DIRICH CONDITIONS
+DSURF                           0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+-------------------------------DESIGN VOL BIOFILM DIRICH CONDITIONS
+DVOL                            0
+//E num - NUMDOF 0  ONOFF 0  VAL 0.0  CURVE none  FUNCT 0   
+---------------------DESIGN BIOFILM GROWTH COUPLING LINE CONDITIONS
+DLINE                           0
+//E num - 0 
+---------------------DESIGN BIOFILM GROWTH COUPLING SURF CONDITIONS
+DSURF                           0
+//E num - 0 
+--------------------------DESIGN NODE 1D ARTERY JUNCTION CONDITIONS
+DPOINT                          0
+//E num - 0 0.0 
+--------------DESIGN LINE EXPORT 1D-ARTERIAL NETWORK GNUPLOT FORMAT
+DLINE                           0
+//E num - 0 
+------------------------DESIGN NODE 1D ARTERY PRESCRIBED CONDITIONS
+DPOINT                          0
+//E num - flow forced 0.0 0.0  none none  
+------------------------DESIGN NODE 1D ARTERY REFLECTIVE CONDITIONS
+DPOINT                          0
+//E num - 0.0  none  
+------------------------DESIGN NODE 1D ARTERY WINDKESSEL CONDITIONS
+DPOINT                          0
+//E num - ExplicitWindkessel RCR 0.0 0.0 0.0 0.0 0.0  none none none none none  
+-------------------------DESIGN NODE 1D ARTERY IN_OUTLET CONDITIONS
+DPOINT                          0
+//E num - inlet 
+-----------------DESIGN NODE 1D ARTERY SCATRA PRESCRIBED CONDITIONS
+DPOINT                          0
+//E num - 0.0  none  
+---------------DESIGN NODE REDUCED D To 3D FLOW COUPLING CONDITIONS
+DPOINT                          0
+//E num - 0 forced pressure Tolerance 0.0 MaximumIterations 0 
+---------------DESIGN SURF 3D To REDUCED D FLOW COUPLING CONDITIONS
+DSURF                           0
+//E num - 0 flow Tolerance 0.0 MaximumIterations 0 
+---------------------DESIGN SURF WINDKESSEL OPTIMIZATION CONDITIONS
+DSURF                           0
+//E num - 0 Psys_Pdia R_C Psystolic 0.0 Pdiastolic 0.0 R1R2_ratio 0.0 Tolerance 0.0 
+----------------------------DESIGN SURF TISSUE REDAIRWAY CONDITIONS
+DSURF                           0
+//E num - 0 
+----------------------------DESIGN NODE TISSUE REDAIRWAY CONDITIONS
+DPOINT                          0
+//E num - 0 
+----------------DESIGN NODE Reduced D AIRWAYS PRESCRIBED CONDITIONS
+DPOINT                          0
+//E num - flow 0.0  none none  0  
+--DESIGN LINE Reduced D AIRWAYS PRESCRIBED EXTERNAL PRESSURE CONDITIONS
+DLINE                           0
+//E num - ExternalPressure 0.0  none none  0  
+---------DESIGN NODE Reduced D AIRWAYS PRESCRIBED SCATRA CONDITIONS
+DPOINT                          0
+//E num - 0.0  none  0  
+------------DESIGN LINE Reduced D AIRWAYS INITIAL SCATRA CONDITIONS
+DLINE                           0
+//E num - O2 CONCENTRATION 0.0 
+-----------DESIGN LINE Reduced D AIRWAYS SCATRA EXCHANGE CONDITIONS
+DLINE                           0
+//E num - 0 
+----------------DESIGN LINE Reduced D AIRWAYS HEMOGLOBIN CONDITIONS
+DLINE                           0
+//E num - INITIAL_CONCENTRATION 0.0 
+-----------------------DESIGN LINE Reduced D AIRWAYS AIR CONDITIONS
+DLINE                           0
+//E num - INITIAL_CONCENTRATION 0.0 
+-----------------DESIGN LINE Reduced D AIRWAYS CAPILLARY CONDITIONS
+DLINE                           0
+//E num - 
+----------------DESIGN NODE Reduced D AIRWAYS VENTILATOR CONDITIONS
+DPOINT                          0
+//E num - flow smooth pressure smooth period 0.0 phase1_period 0.0 smoothness_period1 0.0 smoothness_period2 0.0 0.0 0.0  none none  
+--DESIGN LINE REDUCED D AIRWAYS VOL DEPENDENT PLEURAL PRESSURE CONDITIONS
+DLINE                           0
+//E num - Linear_Exponential TLC 0.0 RV 0.0 P_PLEURAL_0 0.0 P_PLEURAL_LIN 0.0 P_PLEURAL_NONLIN 0.0 TAU 0.0 0.0  none  
+------DESIGN LINE REDUCED D AIRWAYS EVALUATE LUNG VOLUME CONDITIONS
+DLINE                           0
+//E num - 
+-----------------------------------DESIGN SURF IMPEDANCE CONDITIONS
+DSURF                           0
+//E num - 0 timeperiod 0.0 lung termradius 0.0 R1 0.0 R2 0.0 C 0.0 stiffness 0.0 H1 0.0 H2 0.0 H3 0.0 
+-----------------------DESIGN SURF IMPEDANCE CALIBRATION CONDITIONS
+DSURF                           0
+//E num - 0 windkessel_freq_indp Pin_n 0.0 Pin_np 0.0 Pc_n 0.0 Pc_np 0.0 
+----------------------------------DESIGN SURF WINDKESSEL CONDITIONS
+DSURF                           0
+//E num - id 0 C 0.0 R_p 0.0 Z_c 0.0 L 0.0 p_ref 0.0 p_0 0.0 
+-------------DESIGN SURF HEART VALVE ARTERIAL WINDKESSEL CONDITIONS
+DSURF                           0
+//E num - id 0 R_arvalve_max 0.0 R_arvalve_min 0.0 R_atvalve_max 0.0 R_atvalve_min 0.0 k_p 0.0 C 0.0 R_p 0.0 Z_c 0.0 L 0.0 p_ref 0.0 p_ar_0 0.0 P_AT fac 0.0 crv none  VALVE smooth 
+---DESIGN SURF HEART VALVE ARTERIAL PROX DIST WINDKESSEL CONDITIONS
+DSURF                           0
+//E num - id 0 R_arvalve_max 0.0 R_arvalve_min 0.0 R_atvalve_max 0.0 R_atvalve_min 0.0 k_p 0.0 L_arp 0.0 C_arp 0.0 R_arp 0.0 C_ard 0.0 R_ard 0.0 p_ref 0.0 p_arp_0 0.0 y_arp_0 0.0 p_ard_0 0.0 P_AT fac 0.0 crv none  
+--DESIGN SURF HEART VALVE CARDIOVASCULAR FULL WINDKESSEL CONDITIONS
+DSURF                           0
+//E num - id 0 R_arvalve_max 0.0 R_arvalve_min 0.0 R_atvalve_max 0.0 R_atvalve_min 0.0 E_at_max 0.0 E_at_min 0.0 at_act_curve none  C_ar 0.0 R_ar 0.0 L_ar 0.0 Z_ar 0.0 C_ven 0.0 R_ven 0.0 L_ven 0.0 p_at_0 0.0 p_ar_0 0.0 p_ven_0 0.0 q_ar_0 0.0 q_ven_0 0.0 V_at_0 0.0 V_ar_0 0.0 V_ven_0 0.0 
+---------------DESIGN SURF WINDKESSEL STRUCTURE COUPLING CONDITIONS
+DSURF                           0
+//E num - coupling_id 0 
+------------------------------DESIGN SURF SPRING DASHPOT CONDITIONS
+DSURF                           0
+//E num - NUM_SPRING_STIFF_TENS 0 SPRING_STIFF_TENS 0.0 0.0 0.0  NUM_SPRING_STIFF_COMP 0 SPRING_STIFF_COMP 0.0 0.0 0.0  SPRING_OFFSET 0.0 DASHPOT_VISCOSITY 0.0 DIRECTION all COUPLING none  
+---------------------DESIGN SURF SPRING DASHPOT COUPLING CONDITIONS
+DSURF                           0
+//E num - 0 
+----------------------------------------------SURFACTANT CONDITIONS
+DSURF                           0
+//E num - none k1xCbulk 0.0 k2 0.0 m1 0.0 m2 0.0 gamma_0 0.0 gamma_min 0.0 
+---------------------------DESIGN THERMO CONVECTION LINE CONDITIONS
+DLINE                           0
+//E num - Tempnp coeff 0.0 surtemp 0.0 surtempcurve none curve none 
+---------------------------DESIGN THERMO CONVECTION SURF CONDITIONS
+DSURF                           0
+//E num - Tempnp coeff 0.0 surtemp 0.0 surtempcurve none curve none 
+--------------------------------DESIGN SSI COUPLING LINE CONDITIONS
+DLINE                           0
+//E num - 
+--------------------------------DESIGN SSI COUPLING SURF CONDITIONS
+DSURF                           0
+//E num - 
+-----------------------------------DESIGN PARTICLE INFLOW CONDITION
+DPARTICLE                       0
+//E num - vertex1 0.0 0.0 0.0  vertex2 0.0 0.0 0.0  num_per_dir 0 0 0  inflow_vel 0.0 0.0 0.0  inflow_vel_curve 0 inflow_freq 0.0 
+------------------------DESIGN PARTICLE PERIODIC BOUNDARY CONDITION
+DPARTICLE                       0
+//E num - ONOFF 0 0 0  boundaries 0.0 0.0 0.0 0.0 0.0 0.0  
+-----------------------------DESIGN PARTICLE INIT RADIUS CONDITIONS
+DPARTICLE                       0
+//E num - SCALAR 0.0  FUNCT 0  
+---------------------------------------DESIGN SURFACE PARTICLE WALL
+DSURF                           0
+//E num - 0 
+---------------------------------------DESIGN AAA SURFACE CONDITION
+DSURF                           0
+//E num - 0 
+----------------------------TAYLOR GALERKIN OUTFLOW SURF CONDITIONS
+DSURF                           0
+//E num - 
+---------------------TAYLOR GALERKIN NEUMANN INFLOW SURF CONDITIONS
+DSURF                           0
+//E num - 
+-------------------REINITIALIZATION TAYLOR GALERKIN SURF CONDITIONS
+DSURF                           0
+//E num - 
+----------------------------DESIGN LINE LEVEL SET CONTACT CONDITION
+DLINE                           0
+//E num - 
+---------------------------DESIGN POINT LEVEL SET CONTACT CONDITION
+DPOINT                          0
+//E num - 
+-----------------------------------DESIGN ABSORBING LINE CONDITIONS
+DLINE                           0
+//E num - 
+-----------------------------------DESIGN ABSORBING SURF CONDITIONS
+DSURF                           0
+//E num - 
+----------------------------DESIGN PRESSURE MONITOR LINE CONDITIONS
+DLINE                           0
+//E num - 
+----------------------------DESIGN PRESSURE MONITOR SURF CONDITIONS
+DSURF                           0
+//E num - 
+-----------------------------DESIGN BROWNIAN MOTION SURF CONDITIONS
+DSURF                           0
+//E num - none label 0 boltz_const 0.0 temperatur 0.0 frict_coeff 0.0 
+---------------------------------------------------FILAMENT NUMBERS
+DLINE                           0
+//E num - 0 
+------------------------------------------------------FORCE SENSORS
+DPOINT                          0
+//E num - 0 
+----------------------------------------------MICROSCALE CONDITIONS
+DSURF                           0
+//E num - 
+-----------------------------------------------DESIGN VOL STC LAYER
+DVOL                            0
+//E num - 0 
+
+
+-------------------------------------------------STRUCTURE ELEMENTS
+// 0 BEAM2 LIN2 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 BEAM2 LINE2 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 BEAM2R LIN2 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 BEAM2R LIN3 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 BEAM2R LIN4 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 BEAM2R LIN5 0 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 BEAM2R LINE2 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 BEAM2R LINE3 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 BEAM2R LINE4 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 BEAM2R LINE5 0 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 BEAM3 LIN2 0 0  MAT 0 CROSS 0 SHEARCORR 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3 LIN3 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3 LIN4 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3 LIN5 0 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3 LIN6 0 0 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3 LINE2 0 0  MAT 0 CROSS 0 SHEARCORR 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3 LINE3 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3 LINE4 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3 LINE5 0 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3 LINE6 0 0 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3II LIN2 0 0  MAT 0 CROSS 0 SHEARCORR 0 IYY 0 IZZ 0 IRR 0 TRIADS 0 0 0 0 0 0  
+// 0 BEAM3II LIN3 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 IYY 0 IZZ 0 IRR 0 TRIADS 0 0 0 0 0 0 0 0 0  
+// 0 BEAM3II LIN4 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 IYY 0 IZZ 0 IRR 0 TRIADS 0 0 0 0 0 0 0 0 0 0 0 0  
+// 0 BEAM3II LIN5 0 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 IYY 0 IZZ 0 IRR 0 TRIADS 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  
+// 0 BEAM3II LINE2 0 0  MAT 0 CROSS 0 SHEARCORR 0 IYY 0 IZZ 0 IRR 0 TRIADS 0 0 0 0 0 0  
+// 0 BEAM3II LINE3 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 IYY 0 IZZ 0 IRR 0 TRIADS 0 0 0 0 0 0 0 0 0  
+// 0 BEAM3II LINE4 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 IYY 0 IZZ 0 IRR 0 TRIADS 0 0 0 0 0 0 0 0 0 0 0 0  
+// 0 BEAM3II LINE5 0 0 0 0 0  MAT 0 CROSS 0 SHEARCORR 0 IYY 0 IZZ 0 IRR 0 TRIADS 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  
+no element type 'BEAM3CL' defined
+// 0 BEAM3EB LIN2 0 0  MAT 0 CROSS 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3EB LIN3 0 0 0  MAT 0 CROSS 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3EB LINE2 0 0  MAT 0 CROSS 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3EB LINE3 0 0 0  MAT 0 CROSS 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3EBTOR LIN2 0 0  MAT 0 CROSS 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3EBTOR LINE2 0 0  MAT 0 CROSS 0 MOMIN 0 MOMINPOL 0 
+// 0 BEAM3EBANISOTROP LIN2 0 0  MAT 0 CROSS 0 MOMINY 0 MOMINZ 0 MOMINPOL 0 TANGENTS 0 0 0 0 0 0  CURVATURE 0 0 0 0 0 0  OPT 0 
+// 0 BEAM3EBANISOTROP LIN3 0 0 0  MAT 0 CROSS 0 MOMINY 0 MOMINZ 0 MOMINPOL 0 TANGENTS 0 0 0 0 0 0  CURVATURE 0 0 0 0 0 0  OPT 0 
+// 0 BEAM3EBANISOTROP LIN4 0 0 0 0  MAT 0 CROSS 0 MOMINY 0 MOMINZ 0 MOMINPOL 0 TANGENTS 0 0 0 0 0 0  CURVATURE 0 0 0 0 0 0  OPT 0 
+// 0 BEAM3EBANISOTROP LINE2 0 0  MAT 0 CROSS 0 MOMINY 0 MOMINZ 0 MOMINPOL 0 TANGENTS 0 0 0 0 0 0  CURVATURE 0 0 0 0 0 0  OPT 0 
+// 0 BEAM3EBANISOTROP LINE3 0 0 0  MAT 0 CROSS 0 MOMINY 0 MOMINZ 0 MOMINPOL 0 TANGENTS 0 0 0 0 0 0  CURVATURE 0 0 0 0 0 0  OPT 0 
+// 0 BEAM3EBANISOTROP LINE4 0 0 0 0  MAT 0 CROSS 0 MOMINY 0 MOMINZ 0 MOMINPOL 0 TANGENTS 0 0 0 0 0 0  CURVATURE 0 0 0 0 0 0  OPT 0 
+// 0 BELE2 LINE2 0 0  
+// 0 BELE2 LINE3 0 0 0  
+no element type 'BELE3' defined
+// 0 RIGIDSPHERE POINT1 0  RADIUS 0 DENSITY 0 
+// 0 NSTET4 TET4 0 0 0 0  MAT 0 KINEM '' 
+// 0 NSTET5 TET4 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 SHELL8 QUAD4 0 0 0 0  MAT 0 THICK 0 GP 0 0 0  GP_TRI 0 FORCES '' EAS '' '' '' '' '' ANS '' SDC 0 
+// 0 SHELL8 QUAD8 0 0 0 0 0 0 0 0  MAT 0 THICK 0 GP 0 0 0  GP_TRI 0 FORCES '' EAS '' '' '' '' '' ANS '' SDC 0 
+// 0 SHELL8 QUAD9 0 0 0 0 0 0 0 0 0  MAT 0 THICK 0 GP 0 0 0  GP_TRI 0 FORCES '' EAS '' '' '' '' '' ANS '' SDC 0 
+// 0 SHELL8 TRI3 0 0 0  MAT 0 THICK 0 GP 0 0 0  GP_TRI 0 FORCES '' EAS '' '' '' '' '' ANS '' SDC 0 
+// 0 SHELL8 TRI6 0 0 0 0 0 0  MAT 0 THICK 0 GP 0 0 0  GP_TRI 0 FORCES '' EAS '' '' '' '' '' ANS '' SDC 0 
+// 0 SOLIDH18 HEX18 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDH20 HEX20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDH27 HEX27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDH27PORO HEX27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDH27PLAST HEX27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDH27THERMO HEX27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDH20THERMO HEX20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  STRENGTH 0 ] 
+// 0 SONURBS27 NURBS27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 GP 0 0 0  
+// 0 SOLIDH8 HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDH8P1J1 HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' 
+// 0 SOLIDH8FBAR HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 SOLIDH8FBARSCATRA HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 SOLIDH8FBARTHERMO HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 SOLIDH8PORO HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDH8THERMO HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDH8PLAST HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' FBAR '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 NUMGP 0 RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDH8SCATRA HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDSH18 HEX18 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' TSL '' MEL '' CTL '' VOL '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDSH18PLAST HEX18 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' TSL '' MEL '' CTL '' VOL '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDSH8 HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' ANS '' THICKDIR '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDSH8PLAST HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' ANS '' THICKDIR '' [ FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  ] 
+// 0 SOLIDSH8P8 HEX8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' STAB '' ANS '' LIN '' THICKDIR '' EAS '' ISO '' [ AXI 0 0 0  CIR 0 0 0  RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDSHW6 WEDGE6 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' [ AXI 0 0 0  CIR 0 0 0  OPTORDER RAD 0 0 0  ] 
+// 0 SOLIDT10 TET10 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  ] 
+// 0 SOLIDT4 TET4 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 SOLIDT4PORO TET4 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 SOLIDT4THERMO TET4 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 SOLIDT10THERMO TET10 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  ] 
+no element type 'SOLIDT4PLAST' defined
+// 0 SOLIDT4SCATRA TET4 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 SOLIDT10SCATRA TET10 0 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  ] 
+// 0 SOLIDW6 WEDGE6 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 SOLIDP5 PYRAMID5 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  RAD 0 0 0  STRENGTH 0 ] 
+// 0 SOLIDP5FBAR PYRAMID5 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 SOLIDW6SCATRA WEDGE6 0 0 0 0 0 0  MAT 0 KINEM '' [ AXI 0 0 0  CIR 0 0 0  FIBER1 0 0 0  FIBER2 0 0 0  FIBER3 0 0 0  HU 0 RAD 0 0 0  ] 
+// 0 TORSION2 LIN3 0 0 0  MAT 0 BENDINGPOTENTIAL '' 
+// 0 TORSION2 LINE3 0 0 0  MAT 0 BENDINGPOTENTIAL '' 
+// 0 TORSION3 LIN3 0 0 0  MAT 0 BENDINGPOTENTIAL '' 
+// 0 TORSION3 LINE3 0 0 0  MAT 0 BENDINGPOTENTIAL '' 
+// 0 TRUSS2 LIN2 0 0  MAT 0 CROSS 0 KINEM '' 
+// 0 TRUSS2 LINE2 0 0  MAT 0 CROSS 0 KINEM '' 
+// 0 TRUSS3 LIN2 0 0  MAT 0 CROSS 0 KINEM '' 
+// 0 TRUSS3 LINE2 0 0  MAT 0 CROSS 0 KINEM '' 
+// 0 WALL NURBS4 0 0 0 0  MAT 0 KINEM '' EAS '' THICK 0 STRESS_STRAIN '' GP 0 0  
+// 0 WALL NURBS9 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' THICK 0 STRESS_STRAIN '' GP 0 0  
+// 0 WALL QUAD4 0 0 0 0  MAT 0 KINEM '' EAS '' THICK 0 STRESS_STRAIN '' GP 0 0  
+// 0 WALL QUAD8 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' THICK 0 STRESS_STRAIN '' GP 0 0  
+// 0 WALL QUAD9 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' THICK 0 STRESS_STRAIN '' GP 0 0  
+// 0 WALL TRI3 0 0 0  MAT 0 KINEM '' EAS '' THICK 0 STRESS_STRAIN '' GP 0 0  
+// 0 WALL TRI6 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' THICK 0 STRESS_STRAIN '' GP 0 0  
+// 0 WALLQ4PORO QUAD4 0 0 0 0  MAT 0 KINEM '' EAS '' THICK 0 STRESS_STRAIN '' GP 0 0  
+// 0 WALLQ9PORO QUAD9 0 0 0 0 0 0 0 0 0  MAT 0 KINEM '' EAS '' THICK 0 STRESS_STRAIN '' GP 0 0  
+-----------------------------------------------------FLUID ELEMENTS
+// 0 COMBUST3 HEX20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 COMBUST3 HEX27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 COMBUST3 HEX8 0 0 0 0 0 0 0 0  MAT 0 
+// 0 COMBUST3 PYRAMID5 0 0 0 0 0  MAT 0 
+// 0 COMBUST3 TET10 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 COMBUST3 TET4 0 0 0 0  MAT 0 
+// 0 COMBUST3 WEDGE15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 COMBUST3 WEDGE6 0 0 0 0 0 0  MAT 0 
+// 0 FLUID HEX20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID HEX27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID HEX8 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID NURBS27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID NURBS4 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID NURBS8 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID NURBS9 0 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID PYRAMID5 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID QUAD4 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID QUAD8 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID QUAD9 0 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID TET10 0 0 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID TET4 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID TRI3 0 0 0  MAT 0 NA '' 
+// 0 FLUID TRI6 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID WEDGE15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUID WEDGE6 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUIDXW HEX8 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUIDHDG HEX20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG HEX27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG HEX8 0 0 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG NURBS27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG NURBS4 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG NURBS8 0 0 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG NURBS9 0 0 0 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG PYRAMID5 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG QUAD4 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG QUAD8 0 0 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG QUAD9 0 0 0 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG TET10 0 0 0 0 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG TET4 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG TRI3 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG TRI6 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG WEDGE15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDHDG WEDGE6 0 0 0 0 0 0  MAT 0 NA '' DEG 0 [ SPC 0 ] 
+// 0 FLUIDIMMERSED HEX8 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 FLUIDPOROIMMERSED HEX8 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 MEFLUID HEX8 0 0 0 0 0 0 0 0  MAT 0 NA '' 
+// 0 MEFLUID QUAD4 0 0 0 0  MAT 0 NA '' 
+// 0 MEFLUID TET4 0 0 0 0  MAT 0 NA '' 
+// 0 MEFLUID TRI3 0 0 0  MAT 0 NA '' 
+-------------------------------------------------TRANSPORT ELEMENTS
+// 0 TRANSP HEX20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP HEX27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP HEX8 0 0 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP LINE2 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP LINE3 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP NURBS2 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP NURBS27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP NURBS3 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP NURBS4 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP NURBS8 0 0 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP NURBS9 0 0 0 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP PYRAMID5 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP QUAD4 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP QUAD8 0 0 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP QUAD9 0 0 0 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP TET10 0 0 0 0 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP TET4 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP TRI3 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP TRI6 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP WEDGE15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 TRANSP WEDGE6 0 0 0 0 0 0  MAT 0 TYPE '' [ FIBER1 0 0 0  ] 
+// 0 METRANSP HEX8 0 0 0 0 0 0 0 0  MAT 0 TYPE '' 
+// 0 METRANSP LINE2 0 0  MAT 0 TYPE '' 
+// 0 METRANSP POINT1 0  MAT 0 TYPE '' 
+// 0 METRANSP QUAD4 0 0 0 0  MAT 0 TYPE '' 
+// 0 METRANSP TET4 0 0 0 0  MAT 0 TYPE '' 
+// 0 METRANSP TRI3 0 0 0  MAT 0 TYPE '' 
+-------------------------------------------------------ALE ELEMENTS
+// 0 ALE2 QUAD4 0 0 0 0  MAT 0 
+// 0 ALE2 QUAD8 0 0 0 0 0 0 0 0  MAT 0 
+// 0 ALE2 QUAD9 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 ALE2 TRI3 0 0 0  MAT 0 
+// 0 ALE2 TRI6 0 0 0 0 0 0  MAT 0 
+// 0 ALE3 HEX20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 ALE3 HEX27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 ALE3 HEX8 0 0 0 0 0 0 0 0  MAT 0 
+// 0 ALE3 PYRAMID5 0 0 0 0 0  MAT 0 
+// 0 ALE3 TET10 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 ALE3 TET4 0 0 0 0  MAT 0 
+// 0 ALE3 WEDGE15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 ALE3 WEDGE6 0 0 0 0 0 0  MAT 0 
+----------------------------------------------------THERMO ELEMENTS
+// 0 THERMO HEX20 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 THERMO HEX27 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 THERMO HEX8 0 0 0 0 0 0 0 0  MAT 0 
+// 0 THERMO LINE2 0 0  MAT 0 
+// 0 THERMO LINE3 0 0 0  MAT 0 
+// 0 THERMO NURBS4 0 0 0 0  MAT 0 
+// 0 THERMO NURBS9 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 THERMO PYRAMID5 0 0 0 0 0  MAT 0 
+// 0 THERMO QUAD4 0 0 0 0  MAT 0 
+// 0 THERMO QUAD8 0 0 0 0 0 0 0 0  MAT 0 
+// 0 THERMO QUAD9 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 THERMO TET10 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 THERMO TET4 0 0 0 0  MAT 0 
+// 0 THERMO TRI3 0 0 0  MAT 0 
+// 0 THERMO TRI6 0 0 0 0 0 0  MAT 0 
+// 0 THERMO WEDGE15 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  MAT 0 
+// 0 THERMO WEDGE6 0 0 0 0 0 0  MAT 0 
+----------------------------------------------------ARTERY ELEMENTS
+// 0 ART LIN2 0 0  MAT 0 GP 0 
+// 0 ART LINE2 0 0  MAT 0 GP 0 
+-----------------------------------------REDUCED D AIRWAYS ELEMENTS
+// 0 RED_AIRWAY LINE2 0 0  MAT 0 ElemSolvingType '' TYPE '' Resistance '' PowerOfVelocityProfile 0 WallElasticity 0 PoissonsRatio 0 ViscousTs 0 ViscousPhaseShift 0 WallThickness 0 Area 0 Generation 0 [ BranchLength 0 ] 
+// 0 RED_ACINUS LINE2 0 0  MAT 0 TYPE '' AcinusVolume 0 AlveolarDuctVolume 0 [ Area 0 BETA 0 E1_0 0 E1_01 0 E1_02 0 E1_EXP 0 E1_EXP1 0 E1_EXP2 0 E1_LIN 0 E1_LIN1 0 E1_LIN2 0 KAPPA 0 TAU 0 TAU1 0 TAU2 0 ] 
+// 0 RED_ACINAR_INTER_DEP LINE2 0 0  MAT 0 
+// 0 DCOHESIVE LIN2 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+// 0 DCOHESIVE LINE2 0 0  MAT 0 CROSS 0 SHEARCORR 0 INERMOM 0 
+--------------------------------------------------ACOUSTIC ELEMENTS
+// 0 ACOUSTIC HEX8 0 0 0 0 0 0 0 0  MAT 0 DEG 0 SPC 0 
+// 0 ACOUSTIC QUAD4 0 0 0 0  MAT 0 DEG 0 SPC 0 
+// 0 ACOUSTIC QUAD9 0 0 0 0 0 0 0 0 0  MAT 0 DEG 0 SPC 0 
+// 0 ACOUSTIC TET4 0 0 0 0  MAT 0 DEG 0 SPC 0 
+// 0 ACOUSTIC TRI3 0 0 0  MAT 0 DEG 0 SPC 0 
+// 0 ACOUSTICSOL HEX8 0 0 0 0 0 0 0 0  MAT 0 DEG 0 SPC 0 
+// 0 ACOUSTICSOL QUAD4 0 0 0 0  MAT 0 DEG 0 SPC 0 
+// 0 ACOUSTICSOL QUAD9 0 0 0 0 0 0 0 0 0  MAT 0 DEG 0 SPC 0 
+// 0 ACOUSTICSOL TET4 0 0 0 0  MAT 0 DEG 0 SPC 0 
+// 0 ACOUSTICSOL TRI3 0 0 0  MAT 0 DEG 0 SPC 0 

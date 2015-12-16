@@ -1,0 +1,313 @@
+# baci output control file
+# created by scheucher on red25.stud.lnm.mw.tum.de at Wed Dec 16 14:03:17 2015
+# using code revision -1 
+
+input_file = "/scratch/scheucher/workspace/baci_springfitting/transfer/static_deflection/dat/static.dat"
+problem_type = "Structure"
+spatial_approximation = "Polynomial"
+ndim = 3
+
+field:
+    field = "structure"
+    time = 0
+    step = 0
+
+    num_nd = 678
+    max_nodeid = 677
+    num_ele = 224
+    num_dof = 2034
+
+    mesh_file = "static.mesh.structure.s0"
+
+result:
+    field = "structure"
+    time = 5000
+    step = 1
+
+    result_file = "static.result.structure.s1"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step1/displacement.values"
+        ids = "/step1/displacement.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step1/velocity.values"
+        ids = "/step1/displacement.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step1/acceleration.values"
+        ids = "/step1/displacement.ids"
+
+    gauss_cauchy_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step1/gauss_cauchy_stresses_xyz.values"
+        ids = "/step1/gauss_cauchy_stresses_xyz.ids"
+
+result:
+    field = "structure"
+    time = 10000
+    step = 2
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step2/displacement.values"
+        ids = "/step1/displacement.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step2/velocity.values"
+        ids = "/step1/displacement.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step2/acceleration.values"
+        ids = "/step1/displacement.ids"
+
+    gauss_cauchy_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step2/gauss_cauchy_stresses_xyz.values"
+        ids = "/step1/gauss_cauchy_stresses_xyz.ids"
+
+result:
+    field = "structure"
+    time = 15000
+    step = 3
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step3/displacement.values"
+        ids = "/step1/displacement.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step3/velocity.values"
+        ids = "/step1/displacement.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step3/acceleration.values"
+        ids = "/step1/displacement.ids"
+
+    gauss_cauchy_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step3/gauss_cauchy_stresses_xyz.values"
+        ids = "/step1/gauss_cauchy_stresses_xyz.ids"
+
+result:
+    field = "structure"
+    time = 20000
+    step = 4
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step4/displacement.values"
+        ids = "/step1/displacement.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step4/velocity.values"
+        ids = "/step1/displacement.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step4/acceleration.values"
+        ids = "/step1/displacement.ids"
+
+    gauss_cauchy_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step4/gauss_cauchy_stresses_xyz.values"
+        ids = "/step1/gauss_cauchy_stresses_xyz.ids"
+
+result:
+    field = "structure"
+    time = 25000
+    step = 5
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step5/displacement.values"
+        ids = "/step1/displacement.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step5/velocity.values"
+        ids = "/step1/displacement.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step5/acceleration.values"
+        ids = "/step1/displacement.ids"
+
+    gauss_cauchy_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step5/gauss_cauchy_stresses_xyz.values"
+        ids = "/step1/gauss_cauchy_stresses_xyz.ids"
+
+result:
+    field = "structure"
+    time = 30000
+    step = 6
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step6/displacement.values"
+        ids = "/step1/displacement.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step6/velocity.values"
+        ids = "/step1/displacement.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step6/acceleration.values"
+        ids = "/step1/displacement.ids"
+
+    gauss_cauchy_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step6/gauss_cauchy_stresses_xyz.values"
+        ids = "/step1/gauss_cauchy_stresses_xyz.ids"
+
+result:
+    field = "structure"
+    time = 35000
+    step = 7
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step7/displacement.values"
+        ids = "/step1/displacement.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step7/velocity.values"
+        ids = "/step1/displacement.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step7/acceleration.values"
+        ids = "/step1/displacement.ids"
+
+    gauss_cauchy_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step7/gauss_cauchy_stresses_xyz.values"
+        ids = "/step1/gauss_cauchy_stresses_xyz.ids"
+
+result:
+    field = "structure"
+    time = 40000
+    step = 8
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step8/displacement.values"
+        ids = "/step1/displacement.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step8/velocity.values"
+        ids = "/step1/displacement.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step8/acceleration.values"
+        ids = "/step1/displacement.ids"
+
+    gauss_cauchy_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step8/gauss_cauchy_stresses_xyz.values"
+        ids = "/step1/gauss_cauchy_stresses_xyz.ids"
+
+result:
+    field = "structure"
+    time = 45000
+    step = 9
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step9/displacement.values"
+        ids = "/step1/displacement.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step9/velocity.values"
+        ids = "/step1/displacement.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step9/acceleration.values"
+        ids = "/step1/displacement.ids"
+
+    gauss_cauchy_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step9/gauss_cauchy_stresses_xyz.values"
+        ids = "/step1/gauss_cauchy_stresses_xyz.ids"
+
+result:
+    field = "structure"
+    time = 50000
+    step = 10
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step10/displacement.values"
+        ids = "/step1/displacement.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step10/velocity.values"
+        ids = "/step1/displacement.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step10/acceleration.values"
+        ids = "/step1/displacement.ids"
+
+    gauss_cauchy_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step10/gauss_cauchy_stresses_xyz.values"
+        ids = "/step1/gauss_cauchy_stresses_xyz.ids"
+

@@ -1,0 +1,16 @@
+DIR='/scratch/scheucher/workspace/baci_springfitting/transfer/aero_damping'
+PRE='/scratch/scheucher/workspace/baci_springfitting_release/pre_exodus'
+MAIN='/scratch/scheucher/workspace/baci_springfitting_release/baci-release'
+POST='/scratch/scheucher/workspace/baci_springfitting_release/post_processor'
+
+rm $DIR/out/o*
+rm $DIR/ens/o*
+rm $DIR/dat/o*
+
+
+$PRE --exo=$DIR/plate.exo --bc=$DIR/offset_aerospring.bc --head=$DIR/offset_aerospring.head --dat=$DIR/dat/offset_aerospring.dat
+
+mpirun -np 3 $MAIN $DIR/dat/offset_aerospring.dat $DIR/out/offset_aerospring
+
+$POST --filter=ensight --file=$DIR/out/offset_aerospring --output=$DIR/ens/offset_aerospring --stress=cxyz_ndxyz
+

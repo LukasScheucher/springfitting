@@ -1,0 +1,9 @@
+# baci output control file
+# created by scheucher on red25.stud.lnm.mw.tum.de at Wed Dec 16 14:04:12 2015
+# using code revision -1 
+
+input_file = "/scratch/scheucher/workspace/baci_springfitting/transfer/static_deflection/dat/inverse_static.dat"
+problem_type = "Inverse_Analysis"
+spatial_approximation = "Polynomial"
+ndim = 3
+

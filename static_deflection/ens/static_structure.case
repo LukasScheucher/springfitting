@@ -1,0 +1,41 @@
+# created using post_drt_ensight
+FORMAT
+
+type:	ensight gold
+
+GEOMETRY
+
+model:	2	1	static_structure.geo
+
+VARIABLE
+
+vector per node:	1	2	displacement	static_structure.displacement
+tensor symm per element:	1	3	element_cauchy_stresses_xyz	static_structure.element_cauchy_stresses_xyz
+tensor symm per node:	1	4	nodal_cauchy_stresses_xyz	static_structure.nodal_cauchy_stresses_xyz
+
+TIME
+
+time set:		1
+number of steps:	10
+time values: 5000 10000 15000 20000 25000 30000 35000 40000 45000 
+50000 
+
+time set:		2
+number of steps:	1
+time values: 5000 
+
+
+FILE
+
+file set:		1
+number of steps:	1
+
+file set:		2
+number of steps:	10
+
+file set:		3
+number of steps:	10
+
+file set:		4
+number of steps:	10
+
