@@ -89,12 +89,12 @@ DAMPING                         No
 DIVERCONT                       stop
 DYNAMICTYP                      OneStepTheta
 ITERNORM                        L2
-K_DAMP                          0.5
+K_DAMP                          0
 LOADLIN                         yes
 MAXITER                         50
 MAXTIME                         2.14748e+09
 MINITER                         0
-M_DAMP                          0.5
+M_DAMP                          0
 NLNSOL                          fullnewton
 NORMCOMBI_DISPPRES              And
 NORMCOMBI_RESFDISP              And
@@ -103,7 +103,7 @@ NORM_DISP                       Abs
 NORM_INCO                       Abs
 NORM_PRES                       Abs
 NORM_RESF                       Abs
-NUMSTEP                         600
+NUMSTEP                         800
 PREDICT                         ConstDis
 RESULTSEVRY                     1
 RESEVRYERGY                     0
@@ -120,10 +120,11 @@ UZAWAALGO                       direct
 UZAWAMAXITER                    50
 UZAWAPARAM                      1
 UZAWATOL                        1e-08
+ABSPRESS                        0
+HACKTHETA                       yes
+HACKTIME                        50
 PRESTRESS                       none
 PRESTRESSTIME                   0
-HACKTIME                        -1
-HACKTHETA                       No
 PTCDT                           0.1
 LSMAXITER                       30
 ALPHA_LS                        0.5

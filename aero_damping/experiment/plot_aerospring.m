@@ -30,10 +30,10 @@ clc
 
 %% Messergebnisse
 
-dz0_1=load('dz0_1.dat');
-dz39_1=load('dz39_1.dat');
-M87mbar= dlmread('Damping_elasticpanel_magnetrelease_87mbar.dat','',27);
-M160mbar= dlmread('Damping_elasticpanel_magnetrelease_160mbar.dat','',27);
+dz0_1=load('../../dz0_1.dat');
+dz39_1=load('../../dz39_1.dat');
+M87mbar= dlmread('../../Damping_elasticpanel_magnetrelease_87mbar.dat','',27);
+M160mbar= dlmread('../../Damping_elasticpanel_magnetrelease_160mbar.dat','',27);
 
 
 relation_deltay_deltav=load('relation_deltay_deltav');
@@ -51,7 +51,7 @@ pres_dz39_1=dz39_1(:,2);
 time_dz39_1=dz39_1(:,3);
 
 
-M87mbar       =M87mbar(1:6000,:)
+%M87mbar       =M87mbar(1:6000,:)
 M87mbar_time  =M87mbar(:,1);
 M87mbar_disp  =M87mbar(:,2);
 M87mbar_ampere=M87mbar(:,3);
@@ -68,38 +68,39 @@ plot(time_dz0_1,disp_dz0_1)
 xlabel('time [s]')
 ylabel('offset [mm]')
 title('osciallion with aerospring and displacement offset of 0.0');
+print('exp_hammerblow_nooffset_oscillation','-depsc');
 
 figure()
 plot(time_dz39_1,disp_dz39_1)
 xlabel('time [s]')
 ylabel('offset [mm]')
 title('osciallion with aerospring and displacement offset of 3.9');
-
+print('exp_hammerblow_offset_oscillation','-depsc');
 
 figure()
 plot(pres_dz0_1,disp_dz0_1,'x')
 xlabel('pressure [Pa]')
 ylabel('displacement y [mm]')
 title('measured data');
+print('exp_hammerblow_nooffset_disp2pres_relation','-depsc');
 
 figure()
 plot(pres_dz39_1,disp_dz39_1,'x')
 xlabel('pressure [Pa]')
 ylabel('displacement y [mm]')
 title('measured data');
-
+print('exp_hammerblow_offset_disp2pres_relation','-depsc');
 
 figure()
 plot(M87mbar_time,M87mbar_disp,'-')
 xlabel('time [s]')
 ylabel('displacement y [mm]')
-title('M87mbar disp over time');
+title('determined frequency: ~80Hz ');
+print('magnetrelease_87mbar_oscillation','-depsc');
 
 figure()
 plot(M160mbar_time,M160mbar_disp,'-')
 xlabel('time [s]')
 ylabel('displacement y [mm]')
-title('M160mbar disp over time');
-
-figure()
-plot(M160mbar_time,M160mbar_ampere,'-')
+title('determined frequency: ~85Hz');
+print('magnetrelease_160mbar_oscillation','-depsc');

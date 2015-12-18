@@ -31,12 +31,12 @@ DAMPING                         No
 DIVERCONT                       stop                              // Yes,No,yes,no,YES,NO: Go on with time integration even if Newton-Raphson iteration failed
 DYNAMICTYP                      OneStepTheta                    // Centr_Diff,Gen_EMM,Gen_Alfa,Static,Statics,GenAlpha,OneStepTheta,GEMM,AdamsBashforth2,EulerMaruyama,EulerImpStoch
 ITERNORM                        L2
-K_DAMP                          0.5
+K_DAMP                          0.0
 LOADLIN                         yes
 MAXITER                         50
 MAXTIME                         5000000000
 MINITER                         0
-M_DAMP                          0.5
+M_DAMP                          0.00
 NLNSOL                          fullnewton                      // vague,fullnewton,lsnewton,oppnewton,modnewton,nlncg,ptc,newtonlinuzawa,augmentedlagrange,NoxNewtonLineSearch,noxgeneral
 NORMCOMBI_DISPPRES              And
 NORMCOMBI_RESFDISP              And
@@ -45,7 +45,7 @@ NORM_DISP                       Abs
 NORM_INCO                       Abs
 NORM_PRES                       Abs
 NORM_RESF                       Abs
-NUMSTEP                         600
+NUMSTEP                         800
 PREDICT                         ConstDis                        // Vague,ConstDis,ConstDisVelAcc,TangDis,ConstDisPres,ConstDisVelAccPres
 RESULTSEVRY                     1
 RESEVRYERGY                     0
@@ -63,9 +63,11 @@ UZAWAALGO                       direct
 UZAWAMAXITER                    50
 UZAWAPARAM                      1
 UZAWATOL                        1e-08
+ABSPRESS                        0.0
+HACKTHETA                       yes
+HACKTIME                        50
 ---------------------------------------------STRUCTURAL DYNAMIC/ONESTEPTHETA
 THETA                           0.5 //RESOLVED
-//THETA                           1.0 // STEADY STATE
 --------------------------------------------------------------------SOLVER 2
 AZBDIAG                         0
 AZCONV                          AZ_r0
@@ -107,7 +109,9 @@ MAT 2 MAT_Struct_StVenantKirchhoff YOUNG 2.06e+06 NUE 0.0 DENS 0.0 THEXPANS 0.0
 MAT 3 MAT_Struct_StVenantKirchhoff YOUNG 0.01e+00 NUE 0.0 DENS 0.0 THEXPANS 0.0
 --------------------------------------------------------CLONING MATERIAL MAP
 ----------------------------------------------------------------------CURVE1
-CURVE1 on EXPR FUNC (0.5*(1-cos(pi*t/5.0))) t1 0.0 t2 10.0
+CURVE1 on EXPR FUNC (0.5*(1-cos(pi*t/10.0))) t1 0.0 t2 10.0
+CURVE1 on EXPR FUNC 1 t1 10.0 t2 50.0
+CURVE1 on EXPR FUNC 0 t1 50.0 t2 1000.0
 ----------------------------------------------------------------------CURVE2
 CURVE2 on EXPR FUNC (0.5*(1-cos(pi*t/1000.0))) t1 0.0 t2 1000.0
 ----------------------------------------------------------------------CURVE3

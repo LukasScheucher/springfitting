@@ -75,6 +75,7 @@ UZAWAALGO                       direct
 UZAWAMAXITER                    50
 UZAWAPARAM                      1
 UZAWATOL                        1e-08
+ABSPRESS                        0.0
 ---------------------------------------------STRUCTURAL DYNAMIC/ONESTEPTHETA
 //THETA                           0.5 //RESOLVED
 THETA                           1.0 // STEADY STATE
@@ -112,7 +113,7 @@ ML_SMOOTHERCOARSE               Umfpack
 ML_SMOOTHERFINE                 SGS
 ML_SMOOTHERMED                  SGS
 ML_SMOTIMES                     4 4 4 1 1
-SOLVER                          UMFPACK //Aztec_MSR                       // Amesos_KLU_sym,Amesos_KLU_nonsym,Superlu,vm3,Aztec_MSR,LAPACK_sym,LAPACK_nonsym,UMFPACK
+SOLVER                          UMFPACK //Aztec_MSR // Amesos_KLU_sym,Amesos_KLU_nonsym,Superlu,vm3,Aztec_MSR,LAPACK_sym,LAPACK_nonsym,UMFPACK
 -------------------------------------------------------------------MATERIALS
 MAT 1 MAT_Struct_StVenantKirchhoff YOUNG 2.06e+03 NUE 0.33 DENS 7.8e-03 THEXPANS 0.0
 MAT 2 MAT_Struct_StVenantKirchhoff YOUNG 2.06e+06 NUE 0.0 DENS 0.0 THEXPANS 0.0
